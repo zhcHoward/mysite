@@ -41,3 +41,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# My Settings
+AppSettings.py
+test.db
+mysite_mongo.py
