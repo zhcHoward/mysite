@@ -46,3 +46,4 @@ Temporary Items
 AppSettings.py
 test.db
 mysite_mongo.py
+db/
