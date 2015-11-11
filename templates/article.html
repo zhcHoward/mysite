@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block left_bar %}
+{% if session['logged_in'] %}
+<div class="left_side_bar grid_3">
+    <ul>
+        <li><img src="#" alt="avatar"></li>
+        {% if session['nickname'] == 'zhc' %}
+        <li><a href="{{ url_for('add_article') }}">Write a new article</a></li>
+        <li><a href="{{ url_for('add_updates') }}">Write a new update</a></li>
+        {% endif %}
+    </ul>
+</div>
+<div class="grid_13">
+{% else %}
+<div class="grid_16">
+{% endif %}
+{% endblock %}
+{% block content %}
+<h1>{{ article['title'] }}</h1>
+<p>{{ article['content']|safe }}</p>
+</div>
+{% endblock %}

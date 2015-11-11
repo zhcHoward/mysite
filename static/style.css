@@ -1,0 +1,80 @@
+/*
+ ***************
+ * for all
+ ***************
+ */
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+/*
+ ***************
+ * header
+ ***************
+ */
+header {
+    background: #ccc;
+    overflow: hidden;
+}
+
+header a {
+    color: white;
+}
+
+header .title {
+    font-size: 50px;
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: 10px 10px 5px #888888;
+    float: left;
+}
+
+header .title:hover{
+    color: black;
+}
+
+header .log_in_out a {
+    font-size: 20px;
+    text-align: center;
+    float: right;
+    margin-top: 35px;
+    margin-right: 20px;
+}
+/*
+ ***************
+ * menu
+ ***************
+*/
+.menu li{
+    list-style-type: none;
+    display: inline;
+}
+
+/*
+ ***************
+ * .write
+ ***************
+ */
+.write {
+    border: 1px solid #ccc;
+}
+.write dd:nth-child(2) input {
+    width: 100%;
+}
+
+.write textarea {
+    width: 100%;
+    height: 500px;
+    resize: none;
+}
+
+.write #submit {
+    float: right;
+    margin-top: 5px;
+}
+/*
+ ***************
+ * footer
+ ***************
+ */
