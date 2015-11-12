@@ -47,3 +47,5 @@ AppSettings.py
 test.db
 mysite_mongo.py
 db/
+__pycache__/
+flask_app.py.bak
