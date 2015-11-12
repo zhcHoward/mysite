@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sqlite3
+from markdown import markdown
 import hashlib
 from flask import Flask, request, session, g, redirect, \
     url_for, abort, render_template, flash
@@ -47,7 +48,7 @@ def query_db(query, args=(), one=False):
 @app.route('/articles')
 def index():
     cursor = g.db.execute('select * from articles order by time desc')
-    articles = [dict(id=row[0], title=row[1], content=row[2])
+    articles = [dict(id=row[0], title=row[1], content=markdown(row[2]))
                 for row in cursor.fetchall()]
     return render_template('index.html', articles=articles)
 
@@ -55,16 +56,17 @@ def index():
 @app.route('/articles/<id>')
 def article(id):
     cur = g.db.execute(
-        'select title, content from articles where id = {}'.format(id))
-    article = [dict(title=row[0], content=row[1]) for row in cur.fetchall()]
-    return render_template('article.html', article=article)
+        'select title, content from articles where id = ?', (id,))
+    article = [dict(title=row[0], content=markdown(row[1]))
+               for row in cur.fetchall()]
+    return render_template('article.html', article=article[0])
 
 
 @app.route('/new-article', methods=['GET', 'POST'])
 def add_article():
     if request.method == 'POST':
         g.db.execute(
-            'insert into articles (title, content, time) values (?, ?)',
+            'insert into articles (title, content) values (?, ?)',
             (request.form['title'],
              request.form['content'])
         )
