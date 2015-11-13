@@ -46,6 +46,6 @@ Temporary Items
 AppSettings.py
 test.db
 mysite_mongo.py
-db/
+db/*.db
 __pycache__/
 flask_app.py.bak
