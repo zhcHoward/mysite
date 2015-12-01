@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import sqlite3
 from markdown import markdown
 import hashlib
@@ -39,7 +40,7 @@ def teardown_request(exception):
 def query_db(query, args=(), one=False):
     cur = g.db.execute(query, args)
     rv = cur.fetchall()
-    # cur.close()
+    cur.close()
     return (rv[0] if rv else None) if one else rv
 
 
@@ -83,7 +84,7 @@ def login():
         hashobj.update(request.form['password'].encode('utf-8'))
         pwd_md5 = hashobj.hexdigest()
         user = query_db(
-            "select nickname, email from users where pwd = ?", (pwd_md5,), True)
+            "select nickname, email, avatar from users where pwd = ?", (pwd_md5,), True)
         if user is None:
             error = "Your nickname or e-mail address" + \
                 "doesn't match your password"
@@ -93,7 +94,8 @@ def login():
                     "doesn't match your password"
             else:
                 session['logged_in'] = True
-                session['nickname'] = user[0]
+                session['nickname'] = user['nickname']
+                session['avatar'] = user['avatar']
                 return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
@@ -101,6 +103,8 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    session.pop('avatar', None)
+    session.pop('id', None)
     return redirect(url_for('index'))
 
 
@@ -118,8 +122,15 @@ def add_updates():
 
 @app.route('/updates')
 def updates():
-    updates = query_db("select * from updates order by time desc")
+    cur = g.db.execute("select updates, time from updates order by time desc")
+    updates = [dict(updates=markdown(row[0]), time=row[1])
+               for row in cur.fetchall()]
     return render_template('updates.html', updates=updates)
+
+
+@app.route('/profile')
+def profile():
+    return "Hello World"
 
 
 @app.route('/about')
