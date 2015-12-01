@@ -3,16 +3,16 @@
 {% if session['logged_in'] %}
 <div class="left_side_bar grid_3">
     <ul>
-        <li><img src="#" alt="avatar"></li>
+        <li><a href="{{url_for('profile')}}"><img src="{{session['avatar']}}" alt="Profile"></a></li>
         {% if session['nickname'] == 'zhc' %}
         <li><a href="{{ url_for('add_article') }}">Write a new article</a></li>
         <li><a href="{{ url_for('add_updates') }}">Write a new update</a></li>
         {% endif %}
     </ul>
 </div>
-<div class="grid_13">
+<div class="grid_13 article">
 {% else %}
-<div class="grid_16">
+<div class="grid_16 article">
 {% endif %}
 {% endblock %}
 {% block content %}

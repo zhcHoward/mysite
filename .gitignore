@@ -49,3 +49,4 @@ mysite_mongo.py
 db/*.db
 __pycache__/
 flask_app.py.bak
+*.sql

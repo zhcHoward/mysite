@@ -3,11 +3,11 @@
 <head>
     <title>Garden of Sinners</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../static/reset.css">
-    <link rel="stylesheet" type="text/css" href="../static/text.css">
-    <link rel="stylesheet" type="text/css" href="../static/960.css">
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
-    {# <link rel="shortcut icon" href="../static/favicon.ico"> #}
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/text.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/960.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    {# <link rel="shortcut icon" href="/static/favicon.ico"> #}
 </head>
 <body class="container_16">
     <header>
@@ -22,11 +22,11 @@
             {% endif %}
         </div>
     </header>
-    <hr>
+    <!-- <hr> -->
     <ul class="menu grid_16">
-        <li><a href="/articles">Articles</a></li>
-        <li><a href="/updates">Updates</a></li>
-        <li><a href="/about">About Me</a></li>
+        <li><a class="grid_2" href="/articles">Articles</a></li>
+        <li><a class="grid_2" href="/updates">Updates</a></li>
+        <li><a class="grid_2" href="/about">About Me</a></li>
     </ul>
     <hr>
     {% block left_bar %}{% endblock %}
