@@ -2,17 +2,16 @@
  ***************
  * for all
  ***************
- */
+*/
 a {
     text-decoration: none;
-    color: #000000;
 }
 
 /*
  ***************
  * header
  ***************
- */
+*/
 header {
     background: #ccc;
     overflow: hidden;
@@ -41,24 +40,40 @@ header .log_in_out a {
     margin-top: 35px;
     margin-right: 20px;
 }
+
 /*
  ***************
  * menu
  ***************
 */
-.menu li{
+.menu {
+    margin-top: 20px;
+}
+
+.menu li {
     list-style-type: none;
     display: inline;
+}
+
+.menu a {
+    font-size: 15px;
+    color: black;
+    text-align: center;
+}
+
+.menu a:hover {
+    font-weight: bold;
 }
 
 /*
  ***************
  * .write
  ***************
- */
+*/
 .write {
     border: 1px solid #ccc;
 }
+
 .write dd:nth-child(2) input {
     width: 100%;
 }
@@ -72,6 +87,26 @@ header .log_in_out a {
 .write #submit {
     float: right;
     margin-top: 5px;
+}
+/*
+ ***************
+ * content
+ ***************
+*/
+.article p{
+    white-space: pre-wrap;
+}
+/*
+ ***************
+ * left_side_bar
+ ***************
+*/
+.left_side_bar li {
+    list-style-type: none;
+    margin-left: 0px;
+}
+.left_side_bar img {
+    width: 140px;
 }
 /*
  ***************
