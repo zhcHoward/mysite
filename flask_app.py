@@ -3,6 +3,7 @@ import os
 import sqlite3
 from markdown import markdown
 import hashlib
+# from werkzeug import secure_filename
 from flask import Flask, request, session, g, redirect, \
     url_for, abort, render_template, flash
 
@@ -84,7 +85,7 @@ def login():
         hashobj.update(request.form['password'].encode('utf-8'))
         pwd_md5 = hashobj.hexdigest()
         user = query_db(
-            "select nickname, email, avatar from users where pwd = ?", (pwd_md5,), True)
+            "select id, nickname, email, avatar from users where pwd = ?", (pwd_md5,), True)
         if user is None:
             error = "Your nickname or e-mail address" + \
                 "doesn't match your password"
@@ -94,6 +95,7 @@ def login():
                     "doesn't match your password"
             else:
                 session['logged_in'] = True
+                session['id'] = user['id']
                 session['nickname'] = user['nickname']
                 session['avatar'] = user['avatar']
                 return redirect(url_for('index'))
@@ -128,9 +130,16 @@ def updates():
     return render_template('updates.html', updates=updates)
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    return "Hello World"
+    if request.method == 'POST':
+        file = request.files['file']
+        if file:
+            filename = 'avatar' + os.path.splitext(file.filename)[1]
+            file.save(
+                os.path.join(app.config['UPLOAD_FOLDER'], str(session['id']), filename))
+            #sql
+    return render_template('profile.html')
 
 
 @app.route('/about')
